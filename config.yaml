@@ -1,0 +1,41 @@
+model:
+  name: "unsloth/Phi-3-mini-4k-instruct-bnb-4bit"
+  max_seq_length: 2048
+  dtype: null
+  load_in_4bit: true
+
+data:
+  file: "people_data.json"
+  text_field: "text"
+
+lora:
+  r: 64
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  lora_alpha: 128
+  lora_dropout: 0
+  bias: "none"
+  use_gradient_checkpointing: "unsloth"
+  random_state: 3407
+
+training:
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  warmup_steps: 10
+  max_steps: 60
+  logging_steps: 1
+  output_dir: "outputs"
+  optim: "adamw_8bit"
+  seed: 3407
+
+export:
+  save_model: true
+  quantization_method: "q4_k_m"
+  maximum_memory_usage: 0.5 # 50% of GPU memory
+  output_dir: "gguf_model_scratch_fixed"
