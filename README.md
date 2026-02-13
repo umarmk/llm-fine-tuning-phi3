@@ -1,4 +1,4 @@
-# LLM Fine-Tuning for Information Extraction (NER)
+# LLM Fine-Tuning for Information Extraction 
 
 This project provides a pipeline for fine-tuning the **Phi-3-mini-4k-instruct** model for **Information Extraction** tasks.
 
